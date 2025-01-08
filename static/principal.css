@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #151513;
+}
+
+p {
+    font-size: 35px;
+    color: #D3E601;
+}
+
+h1 {
+    font-size: 65px;
+    color: #D3E601;
+}
+
+
+.container {
+    display: grid;
+    width: 100%;
+    height: 100vh;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+}
+
+.text {
+    display: grid;
+
+}
+
+.input {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.botao {
+    background-color: #EAE9E7;
+    padding: 0.75rem;
+    width: 150px;
+    border-radius: 1.2rem;
+    font-size: 20px;
+    margin-top: 2rem;
+}
+
+#dois_botoes {
+    margin-top: 2rem;
+    max-width: 70%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#final {
+    margin-top: 2rem;
+    width: 100%;
+}

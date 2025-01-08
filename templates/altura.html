@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'principal.css') }}">
+    <title>Altura</title>
+</head>
+<body>
+    {% set mensagens = get_flashed_messages() %}
+    {%if mensagens[0]:%}
+    <script>
+        window.alert('{{mensagens[0]}}')
+    </script>
+    {%endif%}
+    <div class="container">
+        <div class="text">
+            <h1>Vamos medir sua altura?</h1>
+            <p>Clique quando estiver pronto:</p>
+        </div>
+        <div class="input" id="dois_botoes">
+            <a href="/dados/nome" class="link">
+                <button class="botao">Anterior</button>
+            </a>
+            <a href="/dados/medir_altura" class="link">
+                <button class="botao">Pronto!</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
