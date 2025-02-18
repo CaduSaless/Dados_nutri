@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
+    <title>Página dados cpf</title>
+</head>
+<body>
+    {% set mensagens = get_flashed_messages() %}
+    {%if mensagens[0]:%}
+    <script>
+        window.alert('{{mensagens[0]}}')
+    </script>
+    {%endif%}
+    <form action="{{ url_for('Dados.cpf_verif') }}" method="post">
+        <div class="container">
+            <div id="input">
+                <label for="cpf">Coloque aqui o seu cpf</label>
+                <input type="number" id="cpf" placeholder="Apenas números. ex:12345678900" name="cpf" required> 
+            </div>
+            <div id="div_botao">    
+                <button class="anterior" type="reset"><a class="link" href="/">Voltar para o início</a></button>
+                <button class="botao"     type="submit">Próxima</button>
+            </div>
+        </div>
+    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+</body>
+</html>
