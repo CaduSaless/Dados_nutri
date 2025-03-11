@@ -13,8 +13,11 @@ cliente = {
     'peso': 0,
     }
 
-
 dados_route = Blueprint("Dados", __name__)
+
+
+#==================================#
+
 
 @dados_route.route('/dados/cpf')
 def cpf():
@@ -23,16 +26,41 @@ def cpf():
 @dados_route.route('/dados/cpf', methods=['POST'])
 def cpf_verif():
     data = request.form.get('cpf')
-    print(type(data))
-    if (data.isdigit() == True):
-        if verifica_cpf(int(data)):
-            cliente['CPF'] = int(data)
+    valor_cpf = data.split('.')
+    final_cpf = valor_cpf[2].split('-')
+    valor_cpf[2] = ''.join(final_cpf)
+    cpf_inteiro = ''.join(valor_cpf)
+    if (cpf_inteiro.isdigit() == True):
+        if verifica_cpf(int(cpf_inteiro)):
+            cliente['CPF'] = cpf_inteiro
             return redirect('/dados/nome')
         else:
             flash('Digite um CPF válido')
     else:
         flash("Digite apenas números")
     return redirect('/dados/cpf')
+
+@dados_route.route('/dados/sexo')
+def sexo():
+    return render_template('sexo.html')
+
+@dados_route.route('/dados/nascimento')
+def datetime():
+    return render_template('datetime.html')
+
+@dados_route.route('/dados/raca')
+def raca():
+    progresso = 100 - 20
+    return render_template('raca.html', progresso=progresso)
+
+@dados_route.route('/dados/escolaridade')
+def escolaridade():
+    return render_template('escolaridade.html')
+
+@dados_route.route('/dados/email')
+def email():
+    return render_template('email.html')
+
 
 @dados_route.route('/dados/nome')
 def nome():
@@ -94,10 +122,14 @@ def peso_medir():
     data = requests.get(f"http://127.0.0.1:5000/api/processa_arquivo?file_url={image_path}")
     digitos = data.json()
     if data.status_code == 200:
-        valor = f'{digitos['digito1']}{digitos['digito2']}.{digitos['digito3']}{digitos['digito4']}'
-        valor = float(valor)
-        cliente['peso'] = valor
-        return redirect('/fim')
+        try:
+            valor = f'{digitos["digito1"]}{digitos["digito2"]}.{digitos["digito3"]}{digitos["digito4"]}'
+            valor = float(valor)
+            cliente['peso'] = valor
+            return redirect('/fim')
+        except:
+            flash('Ocorreu um problema, podemos repetir?')
+            return redirect('/dados/peso')
     else:
         flash('Ocorreu um problema, podemos repetir?')
         return redirect('/dados/peso')

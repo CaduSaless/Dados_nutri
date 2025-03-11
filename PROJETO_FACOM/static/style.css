@@ -55,7 +55,7 @@ label {
     color: black;
 }
 
-#cpf, #nome {
+#cpf, #nome, #email, #data{
     background-color: #EAE9E7;
     padding: 0.75rem;
     width: 100%;

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'descricao.css') }}">
+
+    <title>Marcadores02</title>
+</head>
+<body>
+    <main class="input">
+        <h1>Quais refeições você faz ao longo do dia?</h1>
+        <div class="variaveis-py">{{ progresso }}</div>
+        <form action="/datetime.html" method="post" class="form" id="form">
+            <div class="item-grande">
+                <input type="checkbox" name="refeicao02" id="cafe">
+                <label for="cafe">Café da manhã</label>
+            </div>
+            <div class="item-grande">
+                <input type="checkbox" name="refeicao02" id="lanche-manha" >
+                <label for="lanche-manha">Lanche da manhã</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" name="refeicao02" id="almoco">
+                <label for="almoco">Almoço</label>
+            </div>
+            <div class="item-grande">
+                <input type="checkbox" name="refeicao02" id="lanche-tarde" >
+                <label for="lanche-tarde">Lanche da tarde</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" name="refeicao02" id="jantar" >
+                <label for="jantar">Jantar</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" name="refeicao02" id="ceia" >
+                <label for="ceia">Ceia</label>
+            </div>
+        </form>
+    </main>
+    <footer class="div_botao">    
+        <button class="botao" onclick="window.location.assign('/datetime.html')" id="anterior"> <= Anterior</button>
+        <div class="meio">
+            <section class="progresso">
+                <div class="range">
+                    <div class="completado"></div>
+                </div>
+                <h3>% Completado</h3>
+            </section>
+            <aside><span>&#169;</span> made by UFMS</aside>
+        </div>
+            <button class="botao"  form="form"  type="submit" id="proximo">Próxima =></button>
+    </footer>
+</body>
+</html>

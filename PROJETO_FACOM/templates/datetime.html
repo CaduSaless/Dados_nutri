@@ -3,27 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Bootstrap CSS -->
+    <title>Seleção de Sexo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename= 'campos.css') }}">
-    <title>Nome</title>
 </head>
 <body>
-    {% set mensagens = get_flashed_messages() %}
-    {%if mensagens[0]:%}
-    <script>
-        window.alert('{{mensagens[0]}}')
-    </script>
-    {%endif%}
     <main class="input">
-        <h1>AGORA, DIGITE O SEU NOME</h1>
+        <h1>SELECIONE SUA DATA DE NASCIMENTO</h1>
         <div class="variaveis-py">{{ progresso }}</div>
-        <form action="{{ url_for('Dados.nome_verif') }}" method="post" class="form" id="form">    
-            <input type="text" id="nome" placeholder="Digite aqui..." name="nome" required> 
+        <form action="/datetime.html" method="post" class="form" id="form">    
+            <input type="date" id="data" placeholder="Digite aqui..." name="data" required> 
         </form>    
     </main>
     <footer class="div_botao">    
-        <button class="botao" onclick="window.location.assign('/dados/cpf')" id="anterior"> <= Anterior</button>
+        <button class="botao" onclick="window.location.assign('/datetime.html')" id="anterior"> <= Anterior</button>
         <div class="meio">
             <section class="progresso">
                 <div class="range">

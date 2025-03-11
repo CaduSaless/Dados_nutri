@@ -4,7 +4,6 @@ def verifica_cpf(n):
     i = n
     n_aux = int(n/10)
     ultimo = i%10
-    penultimo = n_aux%10
     i = 1
     soma12 = ultimo
     soma11 = 0

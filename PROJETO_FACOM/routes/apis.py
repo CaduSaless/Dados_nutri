@@ -1,20 +1,12 @@
-from flask import Flask, jsonify, request
-from routes.home import home_route
-from routes.dados import dados_route
-from routes.marcadores_alimentar import marcadores_route
+from flask import Blueprint, jsonify, request
 from services import testes as t
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'Cadu'
+api_route = Blueprint("Api", __name__)
 
-app.register_blueprint(home_route)
-app.register_blueprint(dados_route)
-app.register_blueprint(marcadores_route)
 
-@app.route("/api/processa_arquivo")
+@api_route.route("/api/processa_arquivo")
 def classificar():
     param = request.args.get('file_url')
-    print('Esta é a pasta pega: ',param)
     if not param:
         return jsonify({'erro': 'Parâmetro obrigatório'}), 400
     #file = request.files['file']
@@ -29,5 +21,3 @@ def classificar():
     }
 
     return jsonify(response_data)
-
-app.run(debug=True)
