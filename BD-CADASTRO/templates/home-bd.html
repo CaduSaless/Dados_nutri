@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Cadastros Salvos</title>
+</head>
+<body>
+    <h1>Aqui estão os cadastros já salvos</h1>
+    <div></div>
+    <script>
+        fetch("/bd/content")
+        .then(response => response.text())
+        .then(html => document.querySelector('div').innerHTML = html) 
+        .then(() => {
+            details = document.getElementsByClassName('details')
+            for (const el of details) {
+                el.addEventListener('click', este => {
+                    const linha = el.parentElement.parentElement
+                    const cod = linha.children[0]
+                    console.log(cod)
+                    fetch("{{ url_for('bd.delete') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            codigo: cod.innerHTML
+                        })
+                        })
+                        .then(response => response.json())
+                        .then(data => console.log('Post criado:', data))
+                })
+            }
+        })
+    </script>
+</body>
+</html>
