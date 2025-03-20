@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span>x</span>
+    <table>
+        <tr>
+            <th>Tipo</th>
+            <th>Conteúdo</th>
+        </tr>
+        {%for i in dados%}
+        <tr>
+            <th class="codigo">{{ i }}</th>
+            <th>{{ dados[i] }}</th>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
