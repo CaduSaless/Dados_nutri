@@ -1,34 +1,38 @@
 from flask import Blueprint, render_template, request, flash, session, redirect, url_for
-from database.cadastros import cadastros
 from database.cadastro import user
-from static.functions import encontra_user, deleta_user, retorna_user
+from static.functions import to_dict_user
+import sqlite3
 
 bd_bp = Blueprint('bd', __name__)
+nomes = ['Código','Nome', 'CPF', 'Raça', 'Gênero', 'Escolaridade', 'Email', 'Data de Nascimento']
 
 @bd_bp.route('/')
 def bd_home():
-    return render_template('home-bd.html', cad= cadastros)
+    return render_template('home-bd.html')
 
 @bd_bp.route('/delete', methods=['DELETE'])
 def delete():
     data = request.get_json()
-    print(data)
-    ind = encontra_user(data['codigo'])
-    deleta_user(ind)
+    db = sqlite3.connect('./database/banco_nutri.db')
+    cursor = db.cursor()
+    cursor.execute(f"DELETE FROM Pessoa WHERE id_Pessoa = {data['codigo']}")
+    cursor.execute(f"DELETE FROM Etnia_Pessoa WHERE id_Pessoa = {data['codigo']}")
+    db.commit()
+    db.close()
     return {'ok': 'ok'}
 
 @bd_bp.route('/content')
 def content():
-    return render_template('itens-table.html', cad= cadastros)
-
-@bd_bp.route('/detail')
-def detail_user():
-    return render_template('detail.html')
+    db = sqlite3.connect('./database/banco_nutri.db')
+    cursor = db.cursor()
+    cursor.execute(f"SELECT * FROM Pessoa")
+    cad = cursor.fetchall()
+    db.close()
+    return render_template('itens-table.html', cad= cad)
 
 @bd_bp.route('/get_user/<cod>')
 def details(cod):
-    ind = encontra_user(str(cod))
-    data = retorna_user(ind)
+    data = to_dict_user(cod)
     return render_template('detail.html', dados=data)
 
 @bd_bp.before_request

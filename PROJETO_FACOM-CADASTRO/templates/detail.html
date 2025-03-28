@@ -6,18 +6,26 @@
     <title>Document</title>
 </head>
 <body>
-    <span>x</span>
-    <table>
-        <tr>
-            <th>Tipo</th>
-            <th>Conteúdo</th>
-        </tr>
-        {%for i in dados%}
-        <tr>
-            <th class="codigo">{{ i }}</th>
-            <th>{{ dados[i] }}</th>
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="teste">
+
+        <table>
+            <thead>
+                <tr>
+                    <span>x</span>
+                    <th>Tipo</th>
+                    <th>Conteúdo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for i in dados%}
+                <tr>
+                    <td class="codigo">{{ i }}</td>
+                    <td>{{ dados[i] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
 </body>
 </html>

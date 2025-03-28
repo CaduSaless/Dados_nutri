@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'db.css') }}">
 
     <title>Cadastros Salvos</title>
 </head>
@@ -24,6 +25,7 @@
                 for (const el of delete_btn) {
                     el.addEventListener('click', este => {
                         const linha = el.parentElement.parentElement
+                        console.log(linha)
                         const cod = linha.children[0]
                         fetch("{{ url_for('bd.delete') }}", {
                             method: 'DELETE',
@@ -36,7 +38,8 @@
                             })
                             .then(response => response.json())
                             .then(data => {if (data['ok'] === 'ok'){
-                                load()
+                                linha.innerHTML = ''
+                                console.log(linha)
                             }})
                     })
                 }

@@ -1,7 +1,6 @@
 from flask import Blueprint, session, request, redirect, url_for, render_template, flash, jsonify
 from database.cadastro import user
-from database.cadastros import cadastros
-from static.functions import formata_cpf, verifica_cpf, verifica_user, user_code
+from static.functions import formata_cpf, verifica_cpf, verifica_user, salva_user, code_etnia, vetor_etnia, add_etnia
 
 cadastro_bp = Blueprint('cadastro', __name__)
 
@@ -88,9 +87,11 @@ def etnia():
 def etnia_v():
     data = request.form['etnia']
     
-    if(data.lower() == 'outro'):
+    if(data.lower() == 'outro(a)'):
         return redirect(url_for('cadastro.etnia_add'))
-    user_atual.update({'etnia': data}) 
+    etnia = code_etnia(data)
+    print(etnia)
+    user_atual.update({'etnia': etnia}) 
     
     return redirect(url_for('cadastro.nasc'))
 
@@ -102,14 +103,17 @@ def etnia_add():
 def etnia_add_v():
     data = request.form['etnia']
     print(data)
-    user_atual.update({'etnia': data}) 
-    etnia_var.append(data)
+    add_etnia(data)
+    etnia = code_etnia(data)
+    user_atual.update({'etnia': etnia}) 
     return redirect(url_for('cadastro.nasc'))
 
 @cadastro_bp.route('/get/etnia')
 def etnia_get():
+    etnia = vetor_etnia()
+    etnia.append('Outro(a)')
     dict = {
-        'etnia': etnia_var
+        'etnia': etnia
     }
     var = jsonify(dict)
     return var
@@ -121,7 +125,8 @@ def nasc():
 @cadastro_bp.route('/cadastro/nascimento', methods=['POST'])
 def nasc_v():
     data = request.form.get('data')
-    print(data)
+    date = data.split('-')
+    data = f"{date[2]}/{date[1]}/{date[0]}"
     user_atual.update({'nascimento': data}) 
     return redirect(url_for('cadastro.escolaridade'))
 
@@ -133,7 +138,6 @@ def escolaridade():
 @cadastro_bp.route('/cadastro/escolaridade', methods=['POST'])
 def escolaridade_v():
     data = request.form['esc']
-    print(data)
     user_atual.update({'escolaridade': data}) 
     return redirect(url_for('cadastro.email'))
 
@@ -145,23 +149,18 @@ def email():
 @cadastro_bp.route('/cadastro/email', methods=['POST'])
 def email_v():
     data = request.form.get('email')
-    print(data)
     user_atual.update({'email': data}) 
     return redirect(url_for('cadastro.fim'))
 
 @cadastro_bp.route('/cadastro/fim')
 def fim():
-    user_atual.update({'codigo': user_code(cadastros)})
-    print(user_atual)
     aux = verifica_user(user_atual)
-    print(aux)
-    user_atual.clear()
-    print(user_atual)
     if not aux:
         flash('Ocorreu um erro ao realizar o seu cadastro, por favor refaça-o!')
         return redirect(url_for('cadastro.homepage_cad'))
-    cadastros.append(aux)
-    return render_template('fim.html', codigo=aux['codigo'])
+    cod = salva_user(aux)
+    user_atual.clear()
+    return render_template('fim.html', codigo=cod)
 
 @cadastro_bp.before_request
 def authentication():

@@ -25,8 +25,20 @@ fetch('/get/etnia')
     document.querySelector('#form').addEventListener('keydown', (e) => {
         if (e.key === 'Enter' && search.value != oi[0]) {
             e.preventDefault()
-            search.value = oi[0]
+            console.log(oi.length)
+            if (oi.length >0) {
+                search.value = oi[0]
+            }
 
+        }
+    })
+    let prox = document.querySelector('#proximo')
+    prox.addEventListener('click', e => {
+        if (search.value != oi[0]) {
+            e.preventDefault()
+            if (oi.length>0) {
+                search.value = oi[0]
+            }
         }
     })
 

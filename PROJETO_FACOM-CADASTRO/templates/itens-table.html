@@ -7,23 +7,27 @@
 </head>
 <body>
     <table>
-        <tr>
-            <th>Código</th>
-            <th>Nome</th>
-            <th>CPF</th>
-            <th>Editar</th>
-        </tr>
-        {%for i in cad%}
-        <tr>
-            <th class="codigo">{{ i['codigo'] }}</th>
-            <th>{{ i['nome'] }}</th>
-            <th>{{ i['CPF'] }}</th>
-            <th>
-                <button class="delete"><i class="fa-solid fa-trash"></i></button>
-                <button class="details"><i class="fa-solid fa-eye"></i></button>
-            </th>
-        </tr>
-        {% endfor %}
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for i in cad%}
+            <tr>
+                <td class="codigo">{{ i[0] }}</td>
+                <td>{{ i[1] }}</td>
+                <td>{{ i[2] }}</td>
+                <td class="buttons">
+                    <button class="delete"><i class="fa-solid fa-trash"></i></button>
+                    <button class="details"><i class="fa-solid fa-eye"></i></button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 </body>
 </html>
