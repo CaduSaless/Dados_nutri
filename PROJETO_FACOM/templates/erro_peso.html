@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'ready.css') }}">
+    <title>Página dados Erro Peso</title>
+</head>
+<body>
+    {% set mensagens = get_flashed_messages() %}
+    {%if mensagens[0]:%}
+    <script>
+        window.alert('{{mensagens[0]}}')
+    </script>
+    {%endif%}
+    <main class="input">
+        <h1>Ocorreu um problema na medição do seu peso!</h1>
+        <h3>Já estamos solucionando, o que deseja fazer?</h3>
+        
+        <div class="variaveis-py">{{ progresso }}</div>
+        <div class="buttons">
+            <button class="botao">Cancelar</button>    
+            <button class="botao">Pular</button>    
+            <button class="botao">Tentar novamente</button>    
+        </div>
+    </main>
+    <footer class="div_botao">    
+        <button class="botao-hidden" onclick="window.location.assign('/')" id="anterior"> <= Anterior</button>
+        <div class="meio">
+            <section class="progresso">
+                <div class="range">
+                    <div class="completado"></div>
+                </div>
+                <h3>% Completado</h3>
+            </section>
+            <aside><span>&#169;</span> made by UFMS</aside>
+        </div>
+            <button class="botao-hidden"  form="form"  type="submit" id="proximo">Próxima =></button>
+    </footer>
+    <script src="{{ url_for('static', filename= 'cru.js') }}"></script>
+</body>
+</html>

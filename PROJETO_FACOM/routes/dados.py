@@ -108,7 +108,7 @@ def peso_medir():
     image_path = r'C:/Users/Carlos Sales/Pictures/webcam-python/'
     cap = cv2.VideoCapture(0)
     if cap.isOpened():
-        time.sleep(2)
+        time.sleep(50)
         _, frame = cap.read()
         image_path += f'picture{gerador_de_link()}.png'
         cv2.imwrite(image_path, frame)
@@ -133,6 +133,10 @@ def peso_medir():
     else:
         flash('Ocorreu um problema, podemos repetir?')
         return redirect('/dados/peso')
+    
+@dados_route.route('/dados/error')
+def peso_erro():
+   return render_template('erro_peso.html')
 
 @dados_route.route('/fim')
 def fim():
