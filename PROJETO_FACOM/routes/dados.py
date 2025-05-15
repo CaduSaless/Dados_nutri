@@ -17,7 +17,20 @@ dados_route = Blueprint("Dados", __name__)
 
 
 #==================================#
-
+  ###data = request.form.get('cpf')
+    ###valor_cpf = data.split('.')
+    ###final_cpf = valor_cpf[2].split('-')
+    ###valor_cpf[2] = ''.join(final_cpf)
+    ###cpf_inteiro = ''.join(valor_cpf)
+    ###if (cpf_inteiro.isdigit() == True):
+        ###if verifica_cpf(int(cpf_inteiro)):
+            ##cliente['CPF'] = cpf_inteiro
+            ###return redirect('/dados/altura')
+        ##else:
+            ##flash('Digite um CPF válido')
+    ##else:
+        ##flash("Digite apenas números")
+    ##return redirect('/dados/cpf')
 
 @dados_route.route('/dados/cpf')
 def cpf():
@@ -25,60 +38,50 @@ def cpf():
 
 @dados_route.route('/dados/cpf', methods=['POST'])
 def cpf_verif():
-    data = request.form.get('cpf')
-    valor_cpf = data.split('.')
-    final_cpf = valor_cpf[2].split('-')
-    valor_cpf[2] = ''.join(final_cpf)
-    cpf_inteiro = ''.join(valor_cpf)
-    if (cpf_inteiro.isdigit() == True):
-        if verifica_cpf(int(cpf_inteiro)):
-            cliente['CPF'] = cpf_inteiro
-            return redirect('/dados/nome')
-        else:
-            flash('Digite um CPF válido')
-    else:
-        flash("Digite apenas números")
-    return redirect('/dados/cpf')
+    data = request.form.get('cpf')  # Obtém o CPF enviado pelo formulário
+    if not data:
+        flash("O campo CPF está vazio. Por favor, insira um CPF.")
+        return redirect('/dados/cpf')
 
-@dados_route.route('/dados/sexo')
-def sexo():
-    return render_template('sexo.html')
+    # Remove caracteres especiais (pontos e traços) do CPF
+    cpf = ''.join(filter(str.isdigit, data))
 
-@dados_route.route('/dados/nascimento')
-def datetime():
-    return render_template('datetime.html')
+    # Verifica se o CPF tem 11 dígitos
+    if len(cpf) != 11:
+        flash("CPF inválido. Por favor, insira um CPF válido.")
+        return redirect('/dados/cpf')
 
-@dados_route.route('/dados/raca')
-def raca():
-    progresso = 100 - 20
-    return render_template('raca.html', progresso=progresso)
+    # Validação do CPF
+    if not valida_cpf(cpf):
+        flash("CPF inválido. Por favor, insira um CPF válido.")
+        return redirect('/dados/cpf')
 
-@dados_route.route('/dados/escolaridade')
-def escolaridade():
-    return render_template('escolaridade.html')
-
-@dados_route.route('/dados/email')
-def email():
-    return render_template('email.html')
+    # CPF válido, salva no cliente e redireciona
+    cliente['CPF'] = cpf
+    return redirect('/dados/altura')
 
 
-@dados_route.route('/dados/nome')
-def nome():
-    return render_template('nome.html')
+def valida_cpf(cpf):
+    """
+    Função para validar o CPF.
+    Retorna True se o CPF for válido, caso contrário, False.
+    """
+    # Verifica se todos os dígitos são iguais (ex.: 111.111.111-11)
+    if cpf == cpf[0] * len(cpf):
+        return False
 
-@dados_route.route('/dados/nome', methods=['POST'])
-def nome_verif():
-    data = request.form.get('nome')
-    print(data)
-    bool = True
-    for i in data:
-        if (i.isalpha() or i.isspace()) == False:
-            bool = False
-    if bool:
-        cliente['nome'] = data
-        return redirect('/dados/altura')
-    flash("Digite apenas letras")
-    return redirect('/dados/nome')
+    # Cálculo do primeiro dígito verificador
+    soma = sum(int(cpf[i]) * (10 - i) for i in range(9))
+    digito1 = (soma * 10 % 11) % 10
+
+    # Cálculo do segundo dígito verificador
+    soma = sum(int(cpf[i]) * (11 - i) for i in range(10))
+    digito2 = (soma * 10 % 11) % 10
+
+    # Verifica se os dígitos calculados correspondem aos dígitos fornecidos
+    return cpf[-2:] == f"{digito1}{digito2}"
+
+  
 
 @dados_route.route('/dados/altura')
 def altura():
@@ -105,16 +108,16 @@ def peso():
 
 @dados_route.route('/dados/medir_peso')
 def peso_medir():
-    image_path = r'C:/Users/Carlos Sales/Pictures/webcam-python/'
+    image_path = r'/home/vinicius/AreaTrabalho/webcam-python'
     cap = cv2.VideoCapture(0)
     if cap.isOpened():
-        time.sleep(50)
+        time.sleep(3)
         _, frame = cap.read()
         image_path += f'picture{gerador_de_link()}.png'
         cv2.imwrite(image_path, frame)
         cap.release()
         cv2.destroyAllWindows()
-        image_path = r'C:/Users/Carlos Sales/Pictures/webcam-python/b80.jpg'
+        image_path = r'/home/vinicius/AreaTrabalho/webcam-python/b80.jpg'
     else:
         flash('Ocorreu um problema, podemos repetir?')
         return redirect('/dados/peso')
@@ -126,30 +129,16 @@ def peso_medir():
             valor = f'{digitos["digito1"]}{digitos["digito2"]}.{digitos["digito3"]}{digitos["digito4"]}'
             valor = float(valor)
             cliente['peso'] = valor
-            return redirect('/fim')
+            return redirect('/marcadores/consumiu01')
         except:
             flash('Ocorreu um problema, podemos repetir?')
             return redirect('/dados/peso')
     else:
         flash('Ocorreu um problema, podemos repetir?')
         return redirect('/dados/peso')
-    
+
 @dados_route.route('/dados/error')
 def peso_erro():
    return render_template('erro_peso.html')
 
-@dados_route.route('/fim')
-def fim():
-    print(cliente)
-    if cliente['altura'] and cliente['peso'] and cliente['CPF'] and cliente['nome']:
-        db = sqlite3.connect('C:/Users/Carlos Sales/Documents/CODE/PROJETO_FACOM/database/clientes.db')
-        cursor = db.cursor()
-        cursor.execute(f'INSERT INTO tabela_clientes (CPF, nome, altura, peso) VALUES ({cliente["CPF"]},"{cliente["nome"]}",{cliente["altura"]},{cliente["peso"]})')
-        db.commit()
-        db.close()
-        cliente['CPF'] = 0
-        cliente['altura'] = 0
-        cliente['nome'] = ''
-        cliente['peso'] = 0
-        return render_template('final.html')
-    return f'Faltam argumentos para inserir no banco de dados'
+

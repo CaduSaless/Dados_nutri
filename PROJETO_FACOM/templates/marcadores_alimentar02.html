@@ -11,7 +11,7 @@
     <main class="input">
         <h1>Quais refeições você faz ao longo do dia?</h1>
         <div class="variaveis-py">{{ progresso }}</div>
-        <form action="/datetime.html" method="post" class="form" id="form">
+        <form action="/marcadores/marcadores02" method="post" class="form" id="form">
             <div class="item-grande">
                 <input type="checkbox" name="refeicao02" id="cafe">
                 <label for="cafe">Café da manhã</label>
@@ -39,7 +39,7 @@
         </form>
     </main>
     <footer class="div_botao">    
-        <button class="botao" onclick="window.location.assign('/datetime.html')" id="anterior"> <= Anterior</button>
+        <button class="botao" onclick="window.location.assign('/marcadores/marcadores01')" id="anterior"> <= Anterior</button>
         <div class="meio">
             <section class="progresso">
                 <div class="range">
@@ -49,7 +49,7 @@
             </section>
             <aside><span>&#169;</span> made by UFMS</aside>
         </div>
-            <button class="botao"  form="form"  type="submit" id="proximo">Próxima =></button>
+            <button class="botao"  onclick="window.location.assign('/marcadores/marcadores03')" id="proximo">Próxima =></button>
     </footer>
 </body>
 </html>

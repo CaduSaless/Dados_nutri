@@ -11,7 +11,7 @@
     <main class="input">
         <h1>No mês passado na sua casa teve comida todos os dias?</h1>
         <div class="variaveis-py">{{ progresso }}</div>
-        <form action="/datetime.html" method="post" class="form" id="form">
+        <form action="/marcadores/marcadores06" method="post" class="form" id="form">
             <div class="item">
                 <input type="radio" name="refeicao06" id="sim">
                 <label for="sim">Sim</label>
@@ -27,7 +27,7 @@
         </form>
     </main>
     <footer class="div_botao">    
-        <button class="botao" onclick="window.location.assign('/datetime.html')" id="anterior"> <= Anterior</button>
+        <button class="botao" onclick="window.location.assign('/marcadores/marcadores05')" id="anterior"> <= Anterior</button>
         <div class="meio">
             <section class="progresso">
                 <div class="range">
@@ -37,7 +37,7 @@
             </section>
             <aside><span>&#169;</span> made by UFMS</aside>
         </div>
-            <button class="botao"  form="form"  type="submit" id="proximo">Próxima =></button>
+            <button class="botao"  onclick="window.location.assign('/marcadores/marcadores07')" id="proximo">Próxima =></button>
     </footer>
     <script src="{{ url_for('static', filename= 'script.js') }}"></script>
 </body>

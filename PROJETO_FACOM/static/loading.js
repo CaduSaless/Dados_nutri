@@ -2,7 +2,7 @@ const btn = document.querySelector('#pronto')
 
 
 btn.addEventListener('click', () => {
-    var time = 17
+    var time = 41
     const tittle = document.createElement('h1')
     tittle.innerHTML = 'Estamos medindo o seu peso'
     const subtittle = document.createElement('h3')
