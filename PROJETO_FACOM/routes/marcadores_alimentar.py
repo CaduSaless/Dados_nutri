@@ -129,18 +129,16 @@ def marcadores10_verify():
 @marcadores_route.route('/fim')
 def fim():
     print(cliente)
-    if cliente['altura'] and cliente['peso'] and cliente['CPF'] and cliente['nome']:
+    if cliente['altura'] and cliente['peso'] and cliente['CPF']:
         db = sqlite3.connect('C:/Users/Carlos Sales/Documents/CODE/PROJETO_FACOM/database/clientes.db')
         cursor = db.cursor()
-        cursor.execute(f'INSERT INTO tabela_clientes (CPF, nome, altura, peso) VALUES ({cliente["CPF"]},"{cliente["nome"]}",{cliente["altura"]},{cliente["peso"]})')
+        cursor.execute(f'INSERT INTO tabela_clientes (CPF, altura, peso) VALUES ({cliente["CPF"]},{cliente["altura"]},{cliente["peso"]})')
         db.commit()
         db.close()
         cliente['CPF'] = 0
         cliente['altura'] = 0
-        cliente['nome'] = ''
         cliente['peso'] = 0
         return render_template('final.html')
     return f'Faltam argumentos para inserir no banco de dados'
 
 
-##### TERMINAR DE EDITAR OS FORMS DE CONSUMIU E MARCADORES #####

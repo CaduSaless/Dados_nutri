@@ -1,35 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
-/* #C0A0E8 #5641F0 #C941F0 #4163F0 #F041CE #8F41F0*/
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
 
 * {
-    padding: 0;
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    max-width: 100dvw;
-    max-height: 100dvh;
-    width: 100dvw;
+    width: 100vw;
     height: 100dvh;
     background-color: #F2F2F2;
     display: grid;
     align-items: center;
     justify-content: center;
+    font-family: "Kanit", sans-serif;
 }
 
 h1 {
-    text-align: center;
-    font-family: "Kanit", sans-serif;
+    font-size: 2rem;
     font-weight: 700;
-    color:#473B11;
-    margin-top: 100px;
+    color: #473B11;
+    text-align: center;
+    margin-bottom: 4rem;
 }
 
-
-.input{
-    display: grid;
+.input {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100vw;
@@ -38,91 +35,24 @@ h1 {
 }
 
 .form {
-    border-radius: 1.125rem;
-    justify-self: center;
-    justify-content: center;
-    align-content: center;
+    background-color: #FFFFFF;
+    border-radius: 1rem;
+    padding: 2rem;
     max-width: 70vw;
     width: 60vw;
-    height: 50vh;
     display: flex;
-    flex-wrap: wrap;
-}
-
-#form-g {
-    width: 70vw;
-}
-
-#form-p {
-    width: 40vw;
-}
-
-label {
-    font-family: "Kanit", sans-serif;
-    font-weight: 200;
-    font-size: 1.5em;
-    margin: 0px 5px;
-    color: #473B11;
-}
-
-input {
-    display: flex;
-    height: 30px;
-    width: 17px;
+    flex-direction: column;
+    
+    gap: 1rem;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .item {
-    width: 130px;
-    height: 50px;
     display: flex;
     align-items: center;
-    align-content: center;
-    justify-content: center;
-    margin: 30px 30px;
-    border: 1px solid black;
-}
-
-/* #8b8b8ba5 */
-.item-selecionado  {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    width: 130px;
-    height: 50px;
-    background-color: #DBBA4D;
-    margin: 30px 30px;
-    border: 2px solid black;
-}
-
-.item-grande {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    margin: 30px 30px;
-    border: 1px solid black;
-    padding: 5px;
-}
-
-.item-selecionado-g {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    padding: 5px;
-    background-color: #DBBA4D;
-    margin: 29px 29px;
-    border: 2px solid black;
-}
-
-.div_botao {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 15dvh;
-    max-height: 15dvh;
-    width: 100%;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: #473B11;
 }
 
 .botao {
@@ -136,7 +66,27 @@ input {
     color: #473B11;
     border: 2px solid #473C11;
     border-radius: 0.6rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
 
+.botao:hover {
+    background-color: #DBBA4D;
+}
+
+.div_botao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 15dvh;
+    max-height: 15dvh;
+    width: 100%;
+}
+
+.meio {
+    height: 100%;
+    display: grid;
+    align-items: end;
 }
 
 .range {
@@ -145,7 +95,6 @@ input {
     background-image: linear-gradient(to right, #DBBA4D, #DB6725);
     display: flex;
     justify-content: end;
-
 }
 
 .completado {
@@ -161,43 +110,68 @@ input {
     justify-content: center;
 }
 
+aside {
+    font-family: "Kanit", sans-serif;
+    font-weight: 300;
+    text-align: center;
+    color: #473B11;
+    margin-top: 1rem;
+}
 
-h3, p {
+span {
+    font-weight: 400;
+}
+
+h3 {
     margin-top: 3px;
     text-align: center;
     font-family: "Kanit", sans-serif;
     font-size: 14px;
     font-weight: 200; 
 }
-  
-.variaveis-py {
-    display: none;
+
+/* Estilo para inputs do tipo radio e checkbox */
+input[type="radio"]:checked + label,
+input[type="checkbox"]:checked + label {
+    color: #DB6725; /* Cor do texto do label quando selecionado */
+    font-weight: 600; /* Deixa o texto mais destacado */
 }
 
-.meio {
-    height: 100%;
-    display: grid;
-    align-items: end;
+/* Adiciona um estilo visual ao marcador */
+input[type="radio"]:checked::before,
+input[type="checkbox"]:checked::before {
+    content: ""; /* Adiciona um check visual */
+    color: #000000; /* Cor do marcador */
+    font-size: 1.2rem;
+    margin: 0 0.5rem .5rem 0;
+    display: inline-block;
 }
 
-aside {
-    font-family: "Kanit", sans-serif;
-    font-weight: 100;
-    text-align: center;
+/* Remove o estilo padrão dos inputs */
+input[type="radio"],
+input[type="checkbox"] {
+    appearance: none; /* Remove o estilo padrão */
+    -webkit-appearance: none; /* Compatibilidade com WebKit */
+    margin-right: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #473B11;
+    border-radius: 50%; /* Para radio buttons */
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #F2F2F2;
+    transition: all 0.3s ease;
 }
 
-span {
-    font-family: "Kanit", sans-serif;
-    font-weight: 200;
+input[type="checkbox"] {
+    border-radius: 0.2rem; /* Para checkboxes */
 }
 
-.cortado {
-    text-decoration: line-through;
+/* Estilo quando o input está selecionado */
+input[type="radio"]:checked,
+input[type="checkbox"]:checked {
+    background-color: #DB6725;
+    border-color: #DB6725;
 }
 
-.descricao {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}

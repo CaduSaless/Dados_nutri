@@ -10,9 +10,6 @@
     <h1>Vamos começar:</h1>
     <form action="/dados/altura_verif" method="post">
         <input type="text" placeholder="Digite aqui" name="altura">
-        <button type="submit">Enviar</button>
-    </form>
-    {% set mensagens = get_flashed_messages() %}
-    <p>{{mensagens}}</p>
+        <button type="submit" class="botao">Enviar</button>
 </body>
 </html>

@@ -3,26 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{ url_for('static', filename= 'favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ url_for('static', filename= 'principal.css') }}">
-    <title>Home</title>
+    <title>Bem-vindo</title>
 </head>
 <body>
-    <div class="container">
-        <div class="text">
-            <h1>Bem Vindo!</h1>
-            <p>Podemos começar?</p>
-        </div>
+    <main class="container">
+        <h1 class="titulo">Bem-vindo ao Sistema Nutrição</h1>
+        <p class="descricao">Estamos prontos para ajudá-lo a iniciar sua jornada de saúde e bem-estar.</p>
         <div class="input">
             <a class="link" href="/dados/cpf">
-                <button class="botao" id="id_botao">Sim</button>
+                <button class="botao" id="id_botao">Iniciar</button>
             </a>
         </div>
-        <h1 id="teste"></h1>
-    </div>
-
-
-
-  
+    </main>
+    <footer class="div_botao">
+        <aside><span>&#169;</span> made by UFMS</aside>
+    </footer>
 </body>
 </html>

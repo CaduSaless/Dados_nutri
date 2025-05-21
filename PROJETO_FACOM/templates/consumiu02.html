@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'descricao.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'options.css') }}">
 
     <title>Consumiu02</title>
 </head>
@@ -12,16 +12,16 @@
         <h1>Ontem você consumiu:</h1>
         <div class="variaveis-py">{{ progresso }}</div>
         <form action="/marcadores/consumiu02" method="post" class="form" id="form-p">
-            <div class="item-grande">
-                <input type="checkbox" name="consumiu" id="bebidas" >
+            <div class="item">
+                <input type="checkbox" name="consumiu" id="bebidas">
                 <label for="bebidas">Bebidas adoçadas</label>
             </div>
-                <div class="item-grande">
-                    <input type="checkbox" name="consumiu" id="massas" >
-                    <label for="massas">Macarrão instantâneo, salgadinhos de pacote ou biscoitos salgados</label>
-                </div>
-                <div class="item-grande">
-                <input type="checkbox" name="consumiu" id="guloseimas" >
+            <div class="item">
+                <input type="checkbox" name="consumiu" id="massas">
+                <label for="massas">Macarrão instantâneo, salgadinhos de pacote ou biscoitos salgados</label>
+            </div>
+            <div class="item">
+                <input type="checkbox" name="consumiu" id="guloseimas">
                 <label for="guloseimas">Biscoito recheado, doces ou guloseimas</label>
             </div>
         </form>
@@ -37,7 +37,7 @@
             </section>
             <aside><span>&#169;</span> made by UFMS</aside>
         </div>
-            <button class="botao"  onclick="window.location.assign('/marcadores/marcadores01')" id="proximo">Próxima =></button>
+        <button class="botao" form="form-p" type="submit" id="proximo">Próxima =></button>
     </footer>
 </body>
 </html>

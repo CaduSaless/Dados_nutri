@@ -14,3 +14,10 @@ inp.addEventListener('input', (el) => {
         }
     }
 })
+
+const variaveis = document.querySelector('.variaveis-py')
+const progresso = document.querySelector('.completado')
+const texto = document.querySelector('h3')
+texto.innerHTML = `${100 - Number(variaveis.innerHTML)}% Completado`
+progresso.style.transition = "width 0.7s ease-out";
+progresso.style.width = `${variaveis.innerHTML}%`

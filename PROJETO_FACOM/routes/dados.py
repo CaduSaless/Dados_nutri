@@ -34,7 +34,7 @@ dados_route = Blueprint("Dados", __name__)
 
 @dados_route.route('/dados/cpf')
 def cpf():
-    return render_template('cpf.html')
+    return render_template('cpf.html', progresso=50)
 
 @dados_route.route('/dados/cpf', methods=['POST'])
 def cpf_verif():
@@ -122,12 +122,13 @@ def peso_medir():
         flash('Ocorreu um problema, podemos repetir?')
         return redirect('/dados/peso')
     
-    data = requests.get(f"http://127.0.0.1:5000/api/processa_arquivo?file_url={image_path}")
+    data = requests.get(url=f'http://10.6.84.22:5000/api/ler_webcam')
     digitos = data.json()
     if data.status_code == 200:
         try:
             valor = f'{digitos["digito1"]}{digitos["digito2"]}.{digitos["digito3"]}{digitos["digito4"]}'
             valor = float(valor)
+            print(valor)
             cliente['peso'] = valor
             return redirect('/marcadores/consumiu01')
         except:

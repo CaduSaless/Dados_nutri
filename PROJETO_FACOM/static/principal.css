@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,58 +7,79 @@
 }
 
 body {
-    background-color: #151513;
+    width: 100vw;
+    height: 100dvh;
+    background-color: #F2F2F2;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    font-family: "Kanit", sans-serif;
 }
-
-p {
-    font-size: 35px;
-    color: #D3E601;
-}
-
-h1 {
-    font-size: 65px;
-    color: #D3E601;
-}
-
 
 .container {
-    display: grid;
-    width: 100%;
-    height: 100vh;
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    align-content: center;
-}
-
-.text {
-    display: grid;
-
-}
-
-.input {
-    width: 100%;
-    display: flex;
     justify-content: center;
+    text-align: center;
+    width: 100vw;
+    height: 85dvh;
+    max-height: 85dvh;
+}
+
+.titulo {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #473B11;
+    margin-bottom: 1rem;
+}
+
+.descricao {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: #7F7F7F;
+    margin-bottom: 2rem;
+}
+
+.botao, .botao-hidden {
+    background-color: #F2F2F2;
+    font-family: "Kanit", sans-serif;
+    font-size: 14px;
+    margin: 0px 30px;
+    width: 140px;
+    height: 37px;
+    text-align: center;
+    color: #473B11;
+    border: 2px solid #473C11;
+    border-radius: 0.6rem;
+
+}
+
+.botao-hidden {
+    opacity: 0;
 }
 
 
-.botao {
-    background-color: #EAE9E7;
-    padding: 0.75rem;
-    width: 150px;
-    border-radius: 1.2rem;
-    font-size: 20px;
-    margin-top: 2rem;
+.link {
+    text-decoration: none;
 }
 
-#dois_botoes {
-    margin-top: 2rem;
-    max-width: 70%;
+.div_botao {
     display: flex;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
+    height: 15dvh;
+    max-height: 15dvh;
 }
 
-#final {
-    margin-top: 2rem;
-    width: 100%;
+aside {
+    font-family: "Kanit", sans-serif;
+    font-weight: 300;
+    text-align: center;
+    color: #473B11;
+    margin-top: 1rem;
+}
+
+span {
+    font-weight: 400;
 }
