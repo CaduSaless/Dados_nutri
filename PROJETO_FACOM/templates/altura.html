@@ -3,37 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'principal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'ready.css') }}">
     <title>Altura</title>
 </head>
-<body>
-    {% set mensagens = get_flashed_messages() %}
-    {%if mensagens[0]:%}
-    <script>
-        window.alert('{{mensagens[0]}}')
-    </script>
-    {%endif%}
-    <div class="container">
-        <div class="text">
+    <body>
+        {% set mensagens = get_flashed_messages() %}
+        {%if mensagens[0]:%}
+        <script>
+            window.alert('{{mensagens[0]}}')
+        </script>
+        {%endif%}
+        <main class="input">
             <h1>Vamos medir sua altura?</h1>
-            <p>Clique quando estiver pronto:</p>
-        </div>
-        <div class="input" id="dois_botoes">
-            <a href="/dados/nome" class="link">
-                <button class="botao">Anterior</button>
-            </a>
-            <a href="/dados/medir_altura" class="link">
-                <button class="botao" id="id_botao">Pronto!</button>
-            </a>
-        </div>
-    </div>
-
-    <script>
-        const funcao = () => {
-            var atual = document.getElementById('teste')
-            atual.innerText = '1'
-        }
-        var teste = document.getElementById('id_botao').addEventListener('click', funcao)
-    </script>
-</body>
+            <h3>Clique aqui quando estiver pronto:</h3>
+            
+            <div class="variaveis-py">{{ progresso }}</div>
+            <div class="buttons">
+                <button class="botao" onclick="window.location.assign('/dados/cpf')">Anterior</button>    
+                <button class="botao" id="pronto" onclick="window.location.assign('/dados/medir_altura')">Pronto</button>    
+            </div>
+        </main>
+        <footer class="div_botao">    
+            <button class="botao-hidden" onclick="window.location.assign('/dados/cpf')" id="anterior"> <= Anterior</button>
+            <div class="meio">
+                <section class="progresso">
+                    <div class="range">
+                        <div class="completado"></div>
+                    </div>
+                    <h3>% Completado</h3>
+                </section>
+                <aside><span>&#169;</span> made by UFMS</aside>
+            </div>
+                <button class="botao-hidden"  form="form"  type="submit" id="proximo">Próxima =></button>
+        </footer>
+    </body>
 </html>
