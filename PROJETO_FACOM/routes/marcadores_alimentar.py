@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, flash
 import time
-import sqlite3
+from flask_sqlalchemy import SQLAlchemy
 
 image_path = r'/home/vinicius/Imagens/webcam-python/b80.jpg'
 cliente = {
@@ -130,11 +130,9 @@ def marcadores10_verify():
 def fim():
     print(cliente)
     if cliente['altura'] and cliente['peso'] and cliente['CPF']:
-        db = sqlite3.connect('C:/Users/Carlos Sales/Documents/CODE/PROJETO_FACOM/database/clientes.db')
-        cursor = db.cursor()
-        cursor.execute(f'INSERT INTO tabela_clientes (CPF, altura, peso) VALUES ({cliente["CPF"]},{cliente["altura"]},{cliente["peso"]})')
-        db.commit()
-        db.close()
+        # Inserção no banco com SQLAlchemy/Postgres
+        from database.db import inserir_cliente
+        inserir_cliente(cliente['CPF'], cliente['altura'], cliente['peso'])
         cliente['CPF'] = 0
         cliente['altura'] = 0
         cliente['peso'] = 0

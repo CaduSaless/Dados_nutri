@@ -1,11 +1,10 @@
 from flask import Blueprint, render_template, request, redirect, flash
-import sqlite3
 import cv2
 import time
 import requests
 from services.functions import verifica_cpf, gerador_de_link
 
-image_path = r'C:/Users/Carlos Sales/Pictures/webcam-python/picture'
+image_path = r'/home/vinicius/AreaTrabalho/webcam-python/b80.jpg'
 cliente = {
     'CPF': 0,
     'nome': '',
@@ -14,23 +13,6 @@ cliente = {
     }
 
 dados_route = Blueprint("Dados", __name__)
-
-
-#==================================#
-  ###data = request.form.get('cpf')
-    ###valor_cpf = data.split('.')
-    ###final_cpf = valor_cpf[2].split('-')
-    ###valor_cpf[2] = ''.join(final_cpf)
-    ###cpf_inteiro = ''.join(valor_cpf)
-    ###if (cpf_inteiro.isdigit() == True):
-        ###if verifica_cpf(int(cpf_inteiro)):
-            ##cliente['CPF'] = cpf_inteiro
-            ###return redirect('/dados/altura')
-        ##else:
-            ##flash('Digite um CPF válido')
-    ##else:
-        ##flash("Digite apenas números")
-    ##return redirect('/dados/cpf')
 
 @dados_route.route('/dados/cpf')
 def cpf():
