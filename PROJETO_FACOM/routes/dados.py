@@ -16,7 +16,7 @@ dados_route = Blueprint("Dados", __name__)
 
 @dados_route.route('/dados/cpf')
 def cpf():
-    return render_template('cpf.html', progresso=50)
+    return render_template('cpf.html')
 
 @dados_route.route('/dados/cpf', methods=['POST'])
 def cpf_verif():

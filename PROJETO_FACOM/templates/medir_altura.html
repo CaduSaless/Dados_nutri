@@ -53,7 +53,7 @@
             <h2>Altura Atual</h2>
             <div class="distance-value"><span id="distance">--</span><span class="unit">cm</span></div>
         </div>
-        <div class="controls">
+        <div class="controls" style="display:none;">
             <button id="connect-btn">Conectar ao Sensor</button>
         </div>
         <div class="info">
@@ -64,15 +64,15 @@
         <input type="hidden" name="altura" id="alturaInput">
     </form>
     <script>
-        let connected = false;
-        const connectBtn = document.getElementById('connect-btn');
-        const distanceElement = document.getElementById('distance');
-        const statusText = document.getElementById('status-text');
-        const statusIndicator = document.querySelector('.status-indicator');
-        const statusContainer = document.querySelector('.status');
-        const alturaInput = document.getElementById('alturaInput');
-        const alturaForm = document.getElementById('alturaForm');
-        let alturaEnviada = false;
+    let connected = false;
+    const connectBtn = document.getElementById('connect-btn');
+    const distanceElement = document.getElementById('distance');
+    const statusText = document.getElementById('status-text');
+    const statusIndicator = document.querySelector('.status-indicator');
+    const statusContainer = document.querySelector('.status');
+    const alturaInput = document.getElementById('alturaInput');
+    const alturaForm = document.getElementById('alturaForm');
+    let alturaEnviada = false;
 
         function updateStatus(isConnected) {
             connected = isConnected;
@@ -131,12 +131,15 @@
             }
         }
 
-        connectBtn.addEventListener('click', connect);
+        // Removido o evento de click, pois a conexão será automática
 
         window.onload = function() {
             if (!navigator.bluetooth) {
                 alert('Seu navegador não suporta Web Bluetooth. Tente usar Chrome ou Edge.');
                 connectBtn.disabled = true;
+            } else {
+                // Conexão automática ao carregar a página
+                connect();
             }
         };
     </script>

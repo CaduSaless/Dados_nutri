@@ -42,4 +42,4 @@ def criar_tabelas():
     db.create_all()
     return 'Tabelas criadas com sucesso!'
 
-app.run(debug=True, port = 5005)
+app.run(debug=True, port = 5009)
