@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  projDB:
+    image: postgres:16
+    container_name: projDB
+    restart: unless-stopped
+    
+
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: senha123
+      POSTGRES_DB: PROJDATABASE
+
+    ports:
+      - "5433:5432"
+      
+    volumes:
+      - projetoFACOM_data:/var/lib/postgresql/data
+
+volumes:
+  projetoFACOM_data:
