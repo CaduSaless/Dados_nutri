@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, flash
 import time
-from flask_sqlalchemy import SQLAlchemy
 
 image_path = r'/home/vinicius/Imagens/webcam-python/b80.jpg'
 cliente = {
